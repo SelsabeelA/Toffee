@@ -1,19 +1,22 @@
 package Payment;
 
+import Product.Item;
+
 import java.util.Map;
 
 public class ShoppingCart {
-	private int cartID;
-	private Map<Item, Integer> cartItems;
+    private int cartID;
+    private Map<Item, Integer> cartItems;
 
-	public void checkout() {
-		//code
-	}
-	public void addItem(Item cartitem, int quantity) {
-		cartItems.
-	}
-	
-	
+    public void checkout() {
+        new Payment();
+    }
+
+    public void addItem(Item cartitem, int quantity) {
+        cartItems.
+    }
+
+
 }
 /*ShoppingCart
 

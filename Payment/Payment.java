@@ -1,5 +1,7 @@
 package Payment;
 
+import Order.Order;
+
 import java.util.Date;
 
 enum PaymentMethod {
@@ -22,6 +24,11 @@ public class Payment {
     private Date paymentDate;
     private PaymentMethod method;
     private PaymentStatus status;
+    private ShoppingCart shoppingCart;
+
+    public Payment(ShoppingCart shoppingCart1) {
+        this.shoppingCart = shoppingCart1;
+    }
 
     public Payment(int myPaymentID, int myEwalletNumber, String myPaymentCode, double myAmount, Date myPaymentDate, PaymentMethod myMethod, PaymentStatus myStatus) {
         this.paymentID = myPaymentID;
@@ -70,7 +77,7 @@ public class Payment {
     private boolean verifyPayment() {
         if (this.status.equals("Completed")) {
             System.out.println("Payment verified!");
-            new
+            new Order(payment);
             return true;
         } else {
             return false;
