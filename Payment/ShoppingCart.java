@@ -9,7 +9,7 @@ public class ShoppingCart {
     private Map<Item, Integer> cartItems;
 
     public void checkout() {
-        new Payment();
+        new Payment(this);
     }
 
     public void addItem(Item cartitem, int quantity) {

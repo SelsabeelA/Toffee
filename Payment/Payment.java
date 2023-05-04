@@ -40,10 +40,6 @@ public class Payment {
         this.status = myStatus;
     }
 
-    public Order processPayment(ShoppingCart s) {
-
-    }
-
     public void cancelPayment(ShoppingCart s) {
         //code
     }
@@ -77,7 +73,7 @@ public class Payment {
     private boolean verifyPayment() {
         if (this.status.equals("Completed")) {
             System.out.println("Payment verified!");
-            new Order(payment);
+            new Order(shoppingCart, this);
             return true;
         } else {
             return false;

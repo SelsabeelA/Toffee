@@ -11,7 +11,7 @@ public class Order {
     private double total;
     private static int IDGenerator;
 
-    Order(ShoppingCart shoppingCart, Payment payment) {
+    public Order(ShoppingCart shoppingCart, Payment payment) {
         id = ++IDGenerator;
         creationDate = payment.getPaymentDate();
         total = payment.getAmount();
