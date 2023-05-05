@@ -5,18 +5,19 @@ import Order.Order;
 import java.util.Date;
 
 enum PaymentMethod {
-    EWallet,
-    OnDelivery,
-    Voucher
+    E_WALLET,
+    CASH_ON_DELIVERY,
+    VOUCHER
 }
 
 enum PaymentStatus {
-    Pending,
-    Completed,
-    Cancelled
+    PENDING,
+    COMPLETED,
+    CANCELLED
 }
 
 public class Payment {
+	public static final int PAYMENT_LIMIT = 2000;
     private int paymentID;
     private int ewalletNumber;
     private String paymentCode;
@@ -26,22 +27,39 @@ public class Payment {
     private PaymentStatus status;
     private ShoppingCart shoppingCart;
 
-    public Payment(ShoppingCart shoppingCart1) {
-        this.shoppingCart = shoppingCart1;
-    }
 
-    public Payment(int myPaymentID, int myEwalletNumber, String myPaymentCode, double myAmount, Date myPaymentDate, PaymentMethod myMethod, PaymentStatus myStatus) {
+    public Payment(int myPaymentID, int myEwalletNumber, String myPaymentCode, double myAmount, PaymentMethod myMethod, PaymentStatus myStatus, ShoppingCart myShoppingCart) {
         this.paymentID = myPaymentID;
         this.ewalletNumber = myEwalletNumber;
         this.paymentCode = myPaymentCode;
         this.amount = myAmount;
-        this.paymentDate = myPaymentDate;
+        this.paymentDate = new Date(); // this line of code inputs the current date & time
         this.method = myMethod;
         this.status = myStatus;
+        this.shoppingCart = myShoppingCart;
     }
 
-    public void cancelPayment(ShoppingCart s) {
-        //code
+    public void processPayment() {
+        if(method == PaymentMethod.CASH_ON_DELIVERY) {
+        	if(verifyPayment()==true) {
+        		status = PaymentStatus.COMPLETED;
+        		System.out.println("Payment confirmed on " + paymentDate);
+            	System.out.println("Dear user, you have chosen to pay cash on delivery.");
+            	System.out.println("Please make sure to have " + amount + "LE ready upon delivery.");
+        	}
+        	else {
+        		System.out.println("Dear user, you cannot pay above the payment limit of " + PAYMENT_LIMIT);
+        		status = PaymentStatus.CANCELLED;
+        		System.out.println("Your order has been cancelled.");
+        	}
+        }
+        else if(method != PaymentMethod.CASH_ON_DELIVERY) {
+        	System.out.println("The other payment methods have not yet been made available.");
+        }
+    }
+    
+    public void cancelPayment(ShoppingCart myShoppingCart) {
+    	status = PaymentStatus.CANCELLED;
     }
 
     public void generatePaymentCode() {
@@ -65,13 +83,17 @@ public class Payment {
         return true;
     }
 
-    private boolean checkPaymentLimit(double amount) {
-        // code to check payment limit
-        return true;
+    private boolean reachedPaymentLimit(double amount) {
+        if(amount > PAYMENT_LIMIT) {
+        	return false;
+        }
+        else {
+        	return true;
+        }
     }
 
     private boolean verifyPayment() {
-        if (this.status.equals("Completed")) {
+        if (status == PaymentStatus.COMPLETED) {
             System.out.println("Payment verified!");
             new Order(shoppingCart, this);
             return true;
@@ -81,5 +103,4 @@ public class Payment {
     }
 
 }
-
 
