@@ -39,11 +39,9 @@ public class ShoppingCart {
         		cartItems.remove(cartItem);
         	}
         }
+        total -= quantity;
     }
     
-    public void updateQuantity(Item cartItem, int quantity) {
-    	cartItems.put(cartitem, quantity);
-    }
     
     public Map<Item, Integer> getItems(){
     	return cartItems;
@@ -55,4 +53,3 @@ public class ShoppingCart {
 
 
 }
-
