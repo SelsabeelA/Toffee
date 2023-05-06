@@ -1,0 +1,9 @@
+1,M&Ms,"A classic candy coated chocolate candy",7.50,FullStock,Mars,1,Chocolate
+2,Hershey's Bar,"A classic chocolate candy bar",12.50,LowInStock,Hershey's,1,Chocolate
+3,Sour Patch Kids,"Sour then sweet gummy candies",10,FullStock,Cadbury,2,Gummies
+4,Haribo Gold Bears,"Chewy and fruity gummy bears",15.0,OutOfStock,Haribo,2,Gummies
+5,Tootsie Roll,"A chewy chocolate candy",2.5,FullStock,Tootsie Roll Industries,4,Candy
+6,Skittles,"A rainbow of fruit flavors in every pack",10.0,FullStock,Mars,2,Gummies
+7,Jolly Rancher,"Hard fruit-flavored candies",2.5,FullStock,Hershey's,3,Lollipops
+8,Dum Dums,"Assorted fruit-flavored lollipops",10,LowInStock,Spangler,3,Lollipops
+9,Nerds,"Tangy and crunchy candy in a box",50,FullStock,Nestle,1,Chocolate
