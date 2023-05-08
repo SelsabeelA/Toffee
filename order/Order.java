@@ -1,6 +1,7 @@
 package order;
 
 import payment.ShoppingCart;
+import product.Item;
 
 import java.util.Date;
 
@@ -9,6 +10,7 @@ public class Order {
     private Date creationDate;
     private double total;
     private static int IDGenerator;
+    private List<Item> items;
 
     public Order() {
     }
@@ -17,9 +19,21 @@ public class Order {
         id = ++IDGenerator;
         creationDate = new Date();
         total = shoppingCart.getTotalQuantity();
+
+        for (Item item : shoppingCart.getItems())
+            items.add(item);
+
         System.out.println("Your order is officially confirmed.");
-        System.out.println("OrderID: " + id + " date:" + creationDate + total);
+    }
+
+    public void print() {
+
+        System.out.println("OrderID: " + id + " Date:" + creationDate + "Total: " + total);
+        for (Item item : items) {
+            System.out
+        }
 
     }
+
 
 }

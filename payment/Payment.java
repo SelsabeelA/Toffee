@@ -1,11 +1,6 @@
 package payment;
-import catalog.CatalogManager;
-import catalog.Category;
-import catalog.Item;
-import order.Order;
 
 import java.util.Date;
-import catalog.CatalogManager;
 
 enum PaymentMethod {
     E_WALLET,
@@ -20,7 +15,7 @@ enum PaymentStatus {
 }
 
 public class Payment {
-	public static final int PAYMENT_LIMIT = 2000;
+    public static final int PAYMENT_LIMIT = 2000;
     private int paymentID;
     private int ewalletNumber;
     private String paymentCode;
@@ -28,10 +23,10 @@ public class Payment {
     private Date paymentDate;
     private PaymentMethod method;
     private PaymentStatus status;
-    private ShoppingCart shoppingCart;
+    private payment.ShoppingCart shoppingCart;
 
 
-    public Payment(int myPaymentID, int myEwalletNumber, String myPaymentCode, double myAmount, PaymentMethod myMethod, PaymentStatus myStatus, ShoppingCart myShoppingCart) {
+    public Payment(int myPaymentID, int myEwalletNumber, String myPaymentCode, double myAmount, PaymentMethod myMethod, PaymentStatus myStatus, payment.ShoppingCart myShoppingCart) {
         this.paymentID = myPaymentID;
         this.ewalletNumber = myEwalletNumber;
         this.paymentCode = myPaymentCode;
@@ -42,31 +37,29 @@ public class Payment {
         this.shoppingCart = myShoppingCart;
         processPayment();
     }
-    
+
 
     public void processPayment() {
-        if(method == PaymentMethod.CASH_ON_DELIVERY) {
-        	if(status == PaymentStatus.PENDING ) {
-        		status = PaymentStatus.COMPLETED;
-        		verifyPayment();
-        		System.out.println("--------------------------");
-        		System.out.println("Payment confirmed on " + paymentDate);
-            	System.out.println("Dear user, you have chosen to pay cash on delivery.");
-            	System.out.println("Please make sure to have " + amount + "LE ready upon delivery.");
-        	}
-        	else {
-        		System.out.println("Dear user, you cannot pay above the payment limit of " + PAYMENT_LIMIT);
-        		status = PaymentStatus.CANCELLED;
-        		System.out.println("Your order has been cancelled.");
-        	}
-        }
-        else if(method != PaymentMethod.CASH_ON_DELIVERY) {
-        	System.out.println("The other payment methods have not yet been made available.");
+        if (method == PaymentMethod.CASH_ON_DELIVERY) {
+            if (status == PaymentStatus.PENDING) {
+                status = PaymentStatus.COMPLETED;
+                verifyPayment();
+                System.out.println("--------------------------");
+                System.out.println("Payment confirmed on " + paymentDate);
+                System.out.println("Dear user, you have chosen to pay cash on delivery.");
+                System.out.println("Please make sure to have " + amount + "LE ready upon delivery.");
+            } else {
+                System.out.println("Dear user, you cannot pay above the payment limit of " + PAYMENT_LIMIT);
+                status = PaymentStatus.CANCELLED;
+                System.out.println("Your order has been cancelled.");
+            }
+        } else if (method != PaymentMethod.CASH_ON_DELIVERY) {
+            System.out.println("The other payment methods have not yet been made available.");
         }
     }
-    
-    public void cancelPayment(ShoppingCart myShoppingCart) {
-    	status = PaymentStatus.CANCELLED;
+
+    public void cancelPayment(payment.ShoppingCart myShoppingCart) {
+        status = PaymentStatus.CANCELLED;
     }
 
     public void generatePaymentCode() {
@@ -91,20 +84,22 @@ public class Payment {
     }
 
     private boolean reachedPaymentLimit(double amount) {
-        if(amount > PAYMENT_LIMIT) {
-        	return false;
-        }
-        else {
-        	return true;
+        if (amount > PAYMENT_LIMIT) {
+            return false;
+        } else {
+            return true;
         }
     }
 
     private boolean verifyPayment() {
         if (status == PaymentStatus.COMPLETED) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    private void setPaymentMethod(PaymentMethod method1) {
+        method = method1;
     }
 
 }
