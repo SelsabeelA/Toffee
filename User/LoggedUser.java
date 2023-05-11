@@ -1,3 +1,4 @@
+package User;
 public class LoggedUser extends GeneralUser {
     protected String name;
     protected String email;
