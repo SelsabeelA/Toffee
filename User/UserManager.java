@@ -84,6 +84,13 @@ import java.util.Scanner;
            String password = in.nextLine();
            user.password = password;
        }
+        public void setAddress() {
+           LoggedUser user = new LoggedUser();
+           System.out.println("Enter address: ");
+           Scanner in = new Scanner(System.in);
+           String address = in.nextLine();
+           user.address = address;
+       }
        public void setOtherDetails() {
            LoggedUser user = new LoggedUser();
            System.out.println("Enter other details: ");
