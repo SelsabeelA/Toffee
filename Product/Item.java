@@ -1,4 +1,4 @@
-package Product;
+package product;
 
 enum AvailabilityStatus {
     FullStock,
@@ -47,5 +47,11 @@ public class Item {
 
     public AvailabilityStatus getAvailability() {
         return availability;
+    }
+
+    @Override
+    public String toString() {
+        return name + " $" + price + " availability:" + availability
+                + "\nItem description: " + description;
     }
 }
