@@ -18,6 +18,7 @@ import java.util.Scanner;
            String name = in.nextLine();
            System.out.println("Please enter email: ");
            String email = in.nextLine();
+           email = email.toLowerCase();
            System.out.println("Please enter password: ");
            String password = in.nextLine();
            System.out.println("Please enter address: ");
@@ -46,20 +47,20 @@ import java.util.Scanner;
            Scanner in = new Scanner(System.in);
            System.out.println("Please enter email: ");
            String email = in.nextLine();
+           email = email.toLowerCase();
            System.out.println("Please enter password: ");
            String password = in.nextLine();
            for (int i = 0; i < detailsList.size(); i++){
                if (detailsList.get(i).equals(email)){
                    if (detailsList.get(i+1).equals(password)){
                        System.out.println("password is correct!");
+                       break;
                    }
-                   else {
-                       System.out.println("Password is incorrect!");
+                   else if (!detailsList.get(i+1).equals(password)) {
+                       System.out.println("Email/Password is incorrect!");
+                       break;
                    }
-               }
-               else {
-                   System.out.println("Email is incorrect!");
-               }
+               }             
            }
        }
        public void setName() {
@@ -74,7 +75,7 @@ import java.util.Scanner;
            System.out.println("Enter email: ");
            Scanner in = new Scanner(System.in);
            String email = in.nextLine();
-           user.email = email;        
+           user.email = email.toLowerCase();        
        }
        public void setPassword() {
            LoggedUser user = new LoggedUser();
