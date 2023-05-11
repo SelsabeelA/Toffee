@@ -14,5 +14,11 @@ public class LoggedUser extends GeneralUser {
         this.address = address;
     }
     public void logout(){}
-    public void viewMydetails(){}
+    public void viewMydetails(){
+        System.out.println("name: "+name);
+        System.out.println("email: "+email);
+        System.out.println("password: "+password);
+        System.out.println("address: "+address);
+        System.out.println("other details: "+otherDetails);
+    }
 }
