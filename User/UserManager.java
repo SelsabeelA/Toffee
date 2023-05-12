@@ -1,6 +1,5 @@
 package User;
-
-package com.mycompany.mavenproject2;
+package com.mycompany.mavenproject3;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,10 +8,21 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-  
-   public class UserManager {
-       protected List <String> detailsList = new ArrayList<>();
-       public UserManager () throws IOException {
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+/**
+ *
+ * @author Revre
+ */
+public class UserManager {
+     protected List <String> detailsList = new ArrayList<>();
+     public UserManager () throws IOException {
            int userChoose = 0;
            System.out.println("Welcome to User Manager: ");
            System.out.println("Choose: \n"+ "1- Register \n"+ "2- Login \n"+ "3- Set Name \n"+ "4- Set Email \n"+ "5- Set Password\n"+ "6- Set Address\n"+ "7- Set Other Details\n");
@@ -58,6 +68,7 @@ import java.util.Scanner;
                    email = in.nextLine();
                }
            }
+           sendOTP(email);
            System.out.println("Please enter password: ");
            String password = in.nextLine();
            System.out.println("Please enter address: ");
@@ -133,6 +144,7 @@ import java.util.Scanner;
            LoggedUser user = new LoggedUser(email, password);
            System.out.println("Enter password: ");
            password = in.nextLine();
+           passwordValidation(password);
            user.password = password;
        }
        public void setAddress() {
@@ -157,4 +169,71 @@ import java.util.Scanner;
            String details = in.nextLine();
            user.otherDetails = details;
        }
-   }
+
+       public void sendOTP(String email) {
+    // generate OTP code
+            int otpCode = (int) (Math.random() * 1000000);
+    
+    // send email with OTP code
+            String host = "smtp.gmail.com";
+            String from = "rev.reformer@gmail.com";
+            String password = "ungeddeglrtndvrp";
+            String to = email;
+            String subject = "OTP Code for Payment";
+            String body = "Your OTP code for payment is: " + otpCode;
+
+            Properties props = System.getProperties();
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", host);
+            props.put("mail.smtp.user", from);
+            props.put("mail.smtp.password", password);
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.auth", "true");
+
+            Session session = Session.getDefaultInstance(props);
+            MimeMessage message = new MimeMessage(session);
+
+            try {
+                message.setFrom(new InternetAddress(from));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                message.setSubject(subject);
+                message.setText(body);
+                Transport transport = session.getTransport("smtp");
+                transport.connect(host, from, password);
+                transport.sendMessage(message, message.getAllRecipients());
+                transport.close();
+                } catch (MessagingException me) {
+                    me.printStackTrace();
+                  }
+                }
+       public void passwordValidation (String password){
+            boolean upperCaseCheck = false;
+            boolean lowerCaseCheck = false;
+            boolean numbersCheck = false;
+            if (password.length() < 8){
+                System.out.println("Password's length should be at least 8 characters!");
+            }
+            for (int i = 0; i < password.length(); i++){
+               if (Character.isUpperCase(password.charAt(i))){
+                   upperCaseCheck = true;
+               }
+               else if (Character.isLowerCase(password.charAt(i))){
+                   lowerCaseCheck = true;
+               }
+               else if (Character.isDigit(password.charAt(i))){
+                   numbersCheck = true;
+               }
+               else if (upperCaseCheck == true && lowerCaseCheck == true && numbersCheck == true){
+                   System.out.println("Password is ok!");
+                   break;
+               }
+           }
+            if (upperCaseCheck == false || lowerCaseCheck == false || numbersCheck == false){
+                System.out.println("Password is not safe! please enter a password that contains uppercase characters & lowercase characters & numbers.");
+                Scanner in = new Scanner(System.in);
+                password = in.nextLine();
+                passwordValidation(password);
+            }
+       }
+}
+
