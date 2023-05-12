@@ -1,4 +1,4 @@
-### Toffee
+## Toffee
 ## Project Name
 This is a sample project designed to showcase a simple implementation of an online shopping platform using Java programming language.
 
