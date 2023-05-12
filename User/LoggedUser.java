@@ -7,11 +7,9 @@ public class LoggedUser extends GeneralUser {
     protected String userState;
     protected String otherDetails;
     public LoggedUser(){}
-    public LoggedUser(String name, String email, String password, String address) {
-        this.name = name;
+    public LoggedUser(String email, String password) {
         this.email = email;
         this.password = password;
-        this.address = address;
     }
     public void logout(){}
     public void viewMydetails(){
