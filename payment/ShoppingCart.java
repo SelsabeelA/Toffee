@@ -19,7 +19,7 @@ public class ShoppingCart {
     public ShoppingCart(CatalogManager myCatalogManager) {
         cartItems = new HashMap<>();
         this.catalogManager = myCatalogManager;
-        catalogManager.printAllCatalog();
+        //catalogManager.printAllCatalog();
         System.out.println("------------------------");
         // Get the items of the "chocolate" category
         Category chocolateCategory = catalogManager.getCategoryMap().get(1);

@@ -102,6 +102,10 @@ public class Payment {
         method = method1;
     }
 
+    private void redeemvoucher(Voucher v) {
+
+    }
+
 }
 
 
