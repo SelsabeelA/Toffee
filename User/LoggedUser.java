@@ -1,13 +1,14 @@
 package User;
-
 package com.mycompany.mavenproject3;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -23,7 +24,15 @@ public class LoggedUser {
     protected List <String> detailsList = new ArrayList<>();
     
     public LoggedUser(String email, String password) {
-      //  Scanner in = new Scanner(System.in);
+        String usersDatabase = "users.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(usersDatabase))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            detailsList.add(line);
+        }
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
         for (int i = 0; i < detailsList.size(); i++){
                if (detailsList.get(i).equals(email)){
                    if (detailsList.get(i+1).equals(password)){
@@ -51,3 +60,4 @@ public class LoggedUser {
         System.out.println("other details: "+otherDetails);
     }
 }
+
