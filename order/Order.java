@@ -20,6 +20,7 @@ public class Order {
         total = shoppingCart.getTotalQuantity();
         orderContent = shoppingCart.toString();
 
+        System.out.println();
         System.out.println("Your order is officially confirmed.");
     }
 

@@ -14,6 +14,7 @@ public class ShoppingCart {
     private Map<Item, Integer> cartItems;
     private double priceTotal;
     private CatalogManager catalogManager;
+    String contents = "";
 
 
     public ShoppingCart(CatalogManager myCatalogManager) {
@@ -53,6 +54,8 @@ public class ShoppingCart {
         priceTotal += cartItem.getPrice() * quantity;
         System.out.println(quantity + " of " + cartItem.getName() + " have been added to the cart, increasing total by "
                 + cartItem.getPrice() * quantity);
+
+        contents += quantity + "x " + cartItem.getName() + "\t\t Price: " + cartItem.getPrice() * quantity + "\n";
     }
 
     public void removeItem(Item cartItem, int quantity) {
@@ -67,7 +70,6 @@ public class ShoppingCart {
         priceTotal -= cartItem.getPrice() * quantity;
 
     }
-
 
     public Map<Item, Integer> getItems() {
         return cartItems;
@@ -87,12 +89,8 @@ public class ShoppingCart {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Items:\n");
-        for (Map.Entry<Item, Integer> entry : cartItems.entrySet()) {
-            sb.append("- ").append(entry.getKey().toString()).append(": ").append(entry.getValue()).append("\n");
-        }
-        sb.append("Total Price: ").append(priceTotal).append("\n");
-        return sb.toString();
+
+        contents += "\nTotal Price: " + priceTotal + "\n";
+        return contents;
     }
 }

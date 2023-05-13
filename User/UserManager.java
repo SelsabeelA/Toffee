@@ -45,15 +45,16 @@ public class UserManager {
 
     public void login() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter email: ");
+        System.out.println("Please Enter Your Email: ");
         String email = in.nextLine();
         email = email.toLowerCase();
-        System.out.println("Please enter password: ");
+        System.out.println("Please Enter Your Password: ");
         String password = in.nextLine();
         for (int i = 0; i < detailsList.size(); i++) {
             if (detailsList.get(i).equals(email)) {
                 if (detailsList.get(i + 1).equals(password)) {
-                    System.out.println("password is correct!");
+                    System.out.println("Password is correct!");
+                    System.out.println("You've Logged in Successfully!");
                     break;
                 } else if (!detailsList.get(i + 1).equals(password)) {
                     System.out.println("Email/Password is incorrect!");

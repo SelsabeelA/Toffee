@@ -5,6 +5,11 @@ import java.util.List;
 public class CatalogManager {
     private List<Category> categories;
 
+    CatalogManager() {
+        printAllCatalog();
+        System.out.println("------------------------");
+    }
+
     public Category getCategoryById(int categoryID) {
         for (Category c : categories) {
             if (c.getId() == categoryID) {
